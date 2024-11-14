@@ -10,12 +10,12 @@ import org.springframework.web.context.request.WebRequest
 @ControllerAdvice
 class ControllerAdvice {
 
-    @ExceptionHandler(Exception::class)
-    fun handleException(ex:Exception, request: WebRequest): ResponseEntity<ErrorResponse> {
+    @ExceptionHandler(NotFoundException::class)
+    fun handleException(ex: NotFoundException, request: WebRequest): ResponseEntity<ErrorResponse> {
         val error = ErrorResponse(
-            400,
-            "Este recurso não existe",
-            "0001",
+            HttpStatus.NOT_FOUND.value(),
+            ex.message,
+            ex.errorCode,
             null
         )
         return ResponseEntity(error, HttpStatus.BAD_REQUEST)
