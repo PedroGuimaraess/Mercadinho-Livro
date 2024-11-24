@@ -9,6 +9,6 @@ import org.springframework.data.repository.CrudRepository
 
 interface BookRepository: CrudRepository<BookModel, Int> {
     fun findByStatus(ativo: BookStatus, pageable: Pageable): Page<BookModel>
-    fun findByCustomer(customer: CustomerModel):List<BookModel>
+    fun findByCustomer(customer: CustomerModel):MutableList<BookModel>
     fun findAll(pageable:Pageable): Page<BookModel>
 }
