@@ -2,9 +2,11 @@ package com.mercadolivro.service
 
 import com.mercadolivro.enum.CostumerStatus
 import com.mercadolivro.enum.Erros
+import com.mercadolivro.enum.Profile
 import com.mercadolivro.exception.NotFoundException
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.repository.CustomerRepository
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestBody
@@ -12,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody
 
 @Service
 class CustomerService(
-    val customerRepository: CustomerRepository,
-    val bookService: BookService
+    private val customerRepository: CustomerRepository,
+    private val bookService: BookService,
+    private val bCrypt: BCryptPasswordEncoder
 )
 {
     fun getAllCustomer(name: String?): List<CustomerModel>{
@@ -29,7 +32,11 @@ class CustomerService(
     }
 
     fun createCustomer(@RequestBody postCustomerRequest: CustomerModel){
-        customerRepository.save(postCustomerRequest)
+        val customerCopy = postCustomerRequest.copy(
+            roles = setOf(Profile.CUSTOMER),
+            password = bCrypt.encode(postCustomerRequest.password)
+        )
+        customerRepository.save(customerCopy)
     }
 
     fun updateCustomer(putCustomerRequest: CustomerModel){
