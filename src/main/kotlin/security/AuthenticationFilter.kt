@@ -1,8 +1,8 @@
 package security
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import com.mercadolivro.dto.request.LoginRequest
+import com.mercadolivro.exception.AuthenticationException
 import com.mercadolivro.repository.CustomerRepository
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -18,10 +18,16 @@ class AuthenticationFilter(
 
     override fun attemptAuthentication(request: HttpServletRequest, response: HttpServletResponse): Authentication {
 
-        val loginRequest = jacksonObjectMapper().readValue(request.inputStream, LoginRequest::class.java)
-        val id = customerRepository.findByEmail(loginRequest.email)?.id
+        try{
+            val loginRequest = jacksonObjectMapper().readValue(request.inputStream, LoginRequest::class.java)
+            val id = customerRepository.findByEmail(loginRequest.email)?.id
 
-        UsernamePasswordAuthenticationToken()
+            val authToken  = UsernamePasswordAuthenticationToken(id, loginRequest.password)
+            return authenticationManager.authenticate(authToken)
+        }catch (ex: Exception){
+            throw AuthenticationException("Falha ao autenticar", "999")
+        }
+
     }
 
 }
