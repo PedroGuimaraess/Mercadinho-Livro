@@ -20,8 +20,7 @@ class AuthenticationFilter(
 
         val loginRequest = jacksonObjectMapper().readValue(request.inputStream, LoginRequest::class.java)
         val id = customerRepository.findByEmail(loginRequest.email)?.id
-
-        UsernamePasswordAuthenticationToken()
+        val authToken  = UsernamePasswordAuthenticationToken(id, loginRequest.password)
+        return authenticationManager.authenticate(authToken)
     }
-
 }

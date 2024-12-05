@@ -32,14 +32,10 @@ class SecurityConfig() {
                     .requestMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll()
                     .anyRequest().authenticated()
             }
-            .httpSecurity.addFilter()
+            //.authenticationProvider(authenticationProvider())
+            //.addFilter(AuthenticationFilter(authenticationManager,customerRepository ))
             .sessionManagement{ sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .build()
-
-//            .authorizeHttpRequests{
-//                    auth -> auth.requestMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll().anyRequest().authenticated()
-//            }
-
     }
 
     @Bean
