@@ -27,6 +27,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.flywaydb:flyway-core:9.0.0")
+	implementation("javax.xml.bind:jaxb-api:2.2.4")
+	implementation("io.jsonwebtoken:jjwt:0.2")
 	implementation("org.flywaydb:flyway-mysql:8.4.4")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

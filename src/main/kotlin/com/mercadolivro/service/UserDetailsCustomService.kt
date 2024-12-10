@@ -5,7 +5,7 @@ import com.mercadolivro.repository.CustomerRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
-import security.UserCustomDetails
+import com.mercadolivro.security.UserCustomDetails
 
 @Service
 class UserDetailsCustomService(

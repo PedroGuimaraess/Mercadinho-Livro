@@ -1,4 +1,4 @@
-package security
+package com.mercadolivro.security
 
 import com.mercadolivro.enum.CostumerStatus
 import com.mercadolivro.model.CustomerModel
@@ -7,7 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 class UserCustomDetails(val customerModel: CustomerModel): UserDetails {
-    val id = customerModel.id
+    val id: Int = customerModel.id!!
     override fun getAuthorities(): MutableCollection<out GrantedAuthority>  =
         customerModel.roles.map{ SimpleGrantedAuthority(
         it.description
