@@ -1,15 +1,13 @@
 # datasource
 spring:
+  profiles:
+    active: dev
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
   jpa:
     hibernate:
       ddl-auto: update
-  datasource:
-    url: jdbc:mysql://localhost:3306/mercadinho?useTimezone=true&serverTimezone=UTC
-    username: root
-    password: 1234
   jackson:
     default-property-inclusion: non_null
 jwt:

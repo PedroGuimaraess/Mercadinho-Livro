@@ -4,6 +4,7 @@ import com.mercadolivro.enum.Role
 import com.mercadolivro.repository.CustomerRepository
 import com.mercadolivro.security.AuthenticationFilter
 import com.mercadolivro.security.AuthorizationFilter
+import com.mercadolivro.security.CustomAuthenticationEntryPoint
 import com.mercadolivro.security.JwtUtil
 import com.mercadolivro.service.UserDetailsCustomService
 import org.springframework.context.annotation.Bean
@@ -29,12 +30,13 @@ class SecurityConfig(
     private val authenticationConfiguration: AuthenticationConfiguration,
     private val customerRepository: CustomerRepository,
     private val userDetails: UserDetailsCustomService,
-    private val jwtUtil: JwtUtil
+    private val jwtUtil: JwtUtil,
+    private val customAuthenticationEntryPoint: CustomAuthenticationEntryPoint
 
 ) {
 
     private val PUBLIC_MATCHERS = arrayOf<String>()
-    private val PUBLIC_POST_MATCHERS = arrayOf("/customers", "/book")
+    private val PUBLIC_POST_MATCHERS = arrayOf("/customers", "/books")
     private val ADMIN_MATCHERS = arrayOf("/admin/**")
 
     private val PUBLIC_ALL_MATCHERS = arrayOf(
@@ -66,6 +68,8 @@ class SecurityConfig(
                 it
                     .requestMatchers(*PUBLIC_MATCHERS).permitAll()
                     .requestMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll()
+                    .requestMatchers(HttpMethod.GET,  *PUBLIC_POST_MATCHERS).permitAll()
+                    .requestMatchers(HttpMethod.PUT,  *PUBLIC_POST_MATCHERS).permitAll()
                     .requestMatchers(*ADMIN_MATCHERS).hasAuthority(Role.ADMIN.description)
                     .requestMatchers(*PUBLIC_ALL_MATCHERS).permitAll()
                     .anyRequest().authenticated()
@@ -74,6 +78,7 @@ class SecurityConfig(
             .addFilter(AuthenticationFilter(authenticationManager(), customerRepository, jwtUtil))
             .addFilter(AuthorizationFilter(authenticationManager(), jwtUtil, userDetails))
             .sessionManagement { sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+            .exceptionHandling{it.authenticationEntryPoint(customAuthenticationEntryPoint)}
             .build()
     }
 
