@@ -4,6 +4,7 @@ plugins {
 	id("org.springframework.boot") version "3.3.5"
 	id("io.spring.dependency-management") version "1.1.6"
 	kotlin("plugin.jpa") version "1.4.30"
+	jacoco
 }
 
 group = "com.mercadolivro"
@@ -30,7 +31,7 @@ dependencies {
 
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testImplementation("org.springframework.security:spring-security-test:6.2.2")
-	testImplementation("io.mockk:mockk:1.13.10")
+	testImplementation("io.mockk:mockk:1.13.13")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

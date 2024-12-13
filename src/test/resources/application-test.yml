@@ -1,0 +1,19 @@
+# datasource
+spring:
+  profiles:
+    active: dev
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/mercadinhotest?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: 1234
+  jackson:
+    default-property-inclusion: non_null
+jwt:
+  secret: f18fd995-4f79-4bc6-952d-5371776d5cac
+  expiration: 999999
