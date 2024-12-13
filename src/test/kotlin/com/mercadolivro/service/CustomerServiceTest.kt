@@ -36,7 +36,7 @@ class CustomerServiceTest{
     private lateinit var bCrypt: BCryptPasswordEncoder
 
     @InjectMockKs
-    @SpyK
+    @SpyK 
     private lateinit var customerService: CustomerService
 
     @Test
