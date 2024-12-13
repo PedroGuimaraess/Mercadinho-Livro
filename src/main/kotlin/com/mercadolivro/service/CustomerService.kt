@@ -50,7 +50,9 @@ class CustomerService(
 //        if(!customerRepository.existsById(id)){
 //            throw Exception()
 //        }
+
         val customer = getCustomerById(id)
+
         bookService.deleteByCustomer(customer)
 
         customer.status = CostumerStatus.INATIVO
