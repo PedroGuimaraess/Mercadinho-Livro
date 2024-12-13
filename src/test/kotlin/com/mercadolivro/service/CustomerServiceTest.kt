@@ -47,7 +47,7 @@ class CustomerServiceTest{
     fun `should return customers when name is informed`(){
         val name = UUID.randomUUID().toString()
 
-        val fakeCustomers = listOf(buildCustomer(), buildCustomer())
+        val fakeCustomerss = listOf(buildCustomer(), buildCustomer())
 
         every {  customerRepository.findByNameContaining(name) } returns fakeCustomers
 
