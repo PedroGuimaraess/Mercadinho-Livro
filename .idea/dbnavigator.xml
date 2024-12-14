@@ -34,8 +34,7 @@
     <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
-    <mapping file-url="file://$PROJECT_DIR$/src/main/resources/db.migration/V1__create_table_customer.sql" connection-id="5e72baf4-3723-48e7-bac6-da459628c13a" session-id="MAIN" current-schema="mercadinho" />
-    <mapping file-url="file://$PROJECT_DIR$/src/main/resources/db.migration/V2__create_table_customer2.sql" connection-id="5e72baf4-3723-48e7-bac6-da459628c13a" session-id="MAIN" current-schema="mercadinho" />
+    <mapping file-url="file://$PROJECT_DIR$/src/main/resources/db.migration" connection-id="5e72baf4-3723-48e7-bac6-da459628c13a" session-id="MAIN" current-schema="mercadinho" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
@@ -87,7 +86,7 @@
           <session-management value="true" />
           <ddl-file-binding value="true" />
           <database-logging value="true" />
-          <connect-automatically value="true" />
+          <connect-automatically value="false" />
           <restore-workspace value="true" />
           <restore-workspace-deep value="false" />
           <environment-type value="default" />

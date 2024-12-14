@@ -41,7 +41,7 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 	//implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.3")
 
-	implementation("org.flywaydb:flyway-core:9.0.0")
+	implementation("org.flywaydb:flyway-core:9.19.0")
 	implementation("org.flywaydb:flyway-mysql:8.4.4")
 	runtimeOnly("mysql:mysql-connector-java:8.0.25")
 
