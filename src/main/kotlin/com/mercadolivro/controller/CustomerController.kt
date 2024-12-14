@@ -3,6 +3,7 @@ package com.mercadolivro.controller
 import com.mercadolivro.dto.request.PostCustomerRequest
 import com.mercadolivro.dto.request.PutCustomerRequest
 import com.mercadolivro.dto.response.CustomerResponse
+import com.mercadolivro.extension.primeiraLetra
 import com.mercadolivro.extension.toCustomerModel
 import com.mercadolivro.extension.toResponse
 import com.mercadolivro.security.UserCanOnlyAcessTheirOwnResouce
@@ -16,6 +17,14 @@ import org.springframework.web.bind.annotation.*
 class CustomerController(
     val customerService: CustomerService
 ) {
+
+    @GetMapping("all")
+    fun getAllCustomer(@RequestParam name: String?): List<CustomerResponse>{
+        //"teste".primeiraLetra()
+        return customerService.getAllCustomer(name).map {
+            it.toResponse()
+        }
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

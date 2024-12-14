@@ -22,7 +22,7 @@ class ControllerAdvice {
             ex.errorCode,
             null
         )
-        return ResponseEntity(error, HttpStatus.BAD_REQUEST)
+        return ResponseEntity(error, HttpStatus.NOT_FOUND)
     }
 
     @ExceptionHandler(BadRequestException::class)
@@ -59,6 +59,6 @@ class ControllerAdvice {
             Erros.ML000.code,
             null
         )
-        return ResponseEntity(error, HttpStatus.BAD_REQUEST)
+        return ResponseEntity(error, HttpStatus.FORBIDDEN)
     }
 }

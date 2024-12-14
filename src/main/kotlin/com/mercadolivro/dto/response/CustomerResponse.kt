@@ -7,7 +7,7 @@ data class CustomerResponse (
 
     var name: String,
 
-    var email:String,
+    var email: String,
 
     var status: CostumerStatus
 )
