@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.mercadolivro.dto.request.PostCustomerRequest
 import com.mercadolivro.dto.request.PutCustomerRequest
 import com.mercadolivro.enum.CostumerStatus
+import com.mercadolivro.enum.Role
 import com.mercadolivro.helper.buildCustomer
 import com.mercadolivro.repository.CustomerRepository
 import com.mercadolivro.security.UserCustomDetails
@@ -159,6 +160,20 @@ class CustomerControllerTest{
         assertEquals(1, customers.size)
         assertEquals(request.name, customers[0].name)
         assertEquals(request.email, customers[0].email)
+    }
+
+    @Test
+    @WithMockUser(roles = ["ADMIN"])
+    fun `should return not found when update customer not existing`(){
+        val request = PutCustomerRequest("Pedro", "pedro@gmail.com")
+
+        mockMvc.perform(put("/customers/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+            .andExpect(status().isNotFound)
+            .andExpect(jsonPath("$.httpCode").value(404))
+            .andExpect(jsonPath("$.message").value("Customer [1] not exists"))
+            .andExpect(jsonPath("$.internalCode").value("ML-201"))
     }
 
     @Test
